@@ -3,6 +3,35 @@ wapper [imu_tk](https://github.com/Kyle-ak/imu_tk.git) to ROS2 Humble
 
 **Develpmenting ....**
 
+## Requirement
+```bash
+sudo apt install libeigen3-dev gnuplot qt5-default qtbase5-dev
+```
+## Collect IMU Data
+- Record a ROS2 bag file with Imu topic
+
+- Or convert a `imu.csv` file to ROS2 bag, refer to [this](https://github.com/freesix/ROS2_CONVERT.git) 
+
+Procedure:
+
+1. Left the IMU static for 50 seconds.
+2. Rotate the IMU and then lay it in a different attitude.
+3. Wait for at least 1 seconds.
+4. Have you rotated the IMU 36 ~ 50 times? If not, go back to step 2.
+5. Done.
+
+## Run
+```bash
+mkdir -p WorkSpace/src
+cd WorkSapce
+git clone https://github.com/freesix/imu_tk_ros2.git  /src
+source /opt/ros/humble/setup.bash
+colcon build
+source install/setup.bash
+ros2 launch imu_tk_ros2 imu_tk.launch.py ros2_bag_path:=${ROS2_bag} imu_topic:="${topic}"
+```
+
+`ROS2_bag` is the path of your ros2 bag, `topic` is imu topic of the bag.
 
 # Original README
 
